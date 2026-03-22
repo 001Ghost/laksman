@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Laksman Sivaruban</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:#7C3AED;--v2:#A855F7;--lime:#CCFF00;--white:#F8F8F2;--off:#0D0D0D;--mid:#181818;--card:#1E1E1E;--muted:#555;--warn:#FF4D00;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--off);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none}
+#cursor{position:fixed;width:10px;height:10px;background:var(--lime);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:exclusion;transition:transform .12s}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(204,255,0,.5);border-radius:50%;pointer-events:none;z-index:9998;mix-blend-mode:exclusion;transition:transform .35s cubic-bezier(.2,1,.2,1)}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:900;opacity:.5}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.05);backdrop-filter:blur(12px);background:rgba(13,13,13,.8)}
+.nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:.1em;color:var(--lime);text-decoration:none}
+.nav-back{font-family:var(--font-mono);font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:var(--white)}
+.nav-cta{font-family:var(--font-mono);font-size:.72rem;background:var(--lime);color:#000;padding:.45rem 1.1rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;transition:background .2s}
+.nav-cta:hover{background:#fff}
+
+/* HERO */
+.page-hero{padding:12rem 3rem 6rem;position:relative;overflow:hidden}
+.page-hero::before{content:'SERVICES';position:absolute;top:50%;left:-1%;transform:translateY(-50%);font-family:var(--font-display);font-size:22vw;color:transparent;-webkit-text-stroke:1px rgba(204,255,0,.06);white-space:nowrap;pointer-events:none;line-height:1;animation:bgdrift 25s ease-in-out infinite alternate}
+@keyframes bgdrift{from{transform:translateY(-50%)}to{transform:translateY(-50%) translateX(-2%)}}
+.hero-tag{display:inline-flex;align-items:center;gap:.6rem;font-family:var(--font-mono);font-size:.72rem;color:var(--lime);letter-spacing:.18em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s forwards}
+.hero-tag::before{content:'';width:28px;height:1px;background:var(--lime)}
+.page-title{font-family:var(--font-display);font-size:clamp(4.5rem,11vw,10rem);line-height:.9;letter-spacing:.02em;opacity:0;animation:fadeUp .8s .25s forwards}
+.page-title em{color:var(--lime);font-style:normal}
+.hero-lead{max-width:600px;font-size:1.15rem;line-height:1.75;color:#999;margin-top:2rem;opacity:0;animation:fadeUp .7s .5s forwards}
+.hero-lead strong{color:var(--white);font-weight:500}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* URGENCY BANNER */
+.urgency{background:var(--warn);padding:1rem 3rem;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+.urgency-text{font-family:var(--font-mono);font-size:.78rem;color:#fff;letter-spacing:.08em;text-transform:uppercase}
+.urgency-text strong{font-weight:700}
+.urgency-pulse{width:8px;height:8px;background:#fff;border-radius:50%;flex-shrink:0;animation:pulse 1.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.6)}}
+.urgency-cta{font-family:var(--font-mono);font-size:.72rem;background:#fff;color:#000;padding:.4rem 1rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;white-space:nowrap;flex-shrink:0;transition:background .2s}
+.urgency-cta:hover{background:var(--lime)}
+
+/* WHY SECTION */
+.why-section{padding:7rem 3rem;background:var(--mid);position:relative}
+.section-kicker{font-family:var(--font-mono);font-size:.72rem;color:var(--v2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem}
+.section-h{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.5rem);line-height:.95;letter-spacing:.02em;margin-bottom:3rem}
+.section-h em{color:var(--lime);font-style:normal}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06)}
+.why-card{background:var(--mid);padding:2.5rem 2rem;position:relative;overflow:hidden;transition:background .3s}
+.why-card:hover{background:#222}
+.why-card-num{font-family:var(--font-display);font-size:5rem;color:rgba(204,255,0,.07);position:absolute;top:-.5rem;right:1rem;line-height:1;pointer-events:none}
+.why-card h3{font-family:var(--font-display);font-size:1.9rem;letter-spacing:.04em;margin-bottom:.8rem;position:relative}
+.why-card p{font-size:.9rem;line-height:1.75;color:#888;position:relative}
+.why-card .accent-line{width:32px;height:3px;background:var(--lime);margin-bottom:1.2rem}
+
+/* SERVICES DEEP DIVE */
+.services-section{padding:7rem 3rem}
+.service-block{display:grid;grid-template-columns:1fr 2fr;gap:4rem;align-items:start;padding:4rem 0;border-bottom:1px solid rgba(255,255,255,.07);position:relative}
+.service-block:last-child{border-bottom:none}
+.service-block-left{}
+.service-block-num{font-family:var(--font-display);font-size:6rem;color:rgba(204,255,0,.08);line-height:1;margin-bottom:.5rem}
+.service-block-name{font-family:var(--font-display);font-size:2.8rem;letter-spacing:.04em;color:var(--white)}
+.service-block-name em{color:var(--lime);font-style:normal}
+.service-block-right{}
+.service-headline{font-size:1.1rem;font-weight:500;color:var(--white);margin-bottom:.8rem;line-height:1.5}
+.service-body{font-size:.92rem;line-height:1.8;color:#888;margin-bottom:1.8rem}
+.service-tools-label{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;margin-bottom:.8rem}
+.tools-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+.tool-pill{font-family:var(--font-mono);font-size:.68rem;padding:.3rem .85rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#ccc;letter-spacing:.06em;transition:border-color .2s,color .2s}
+.tool-pill:hover{border-color:var(--lime);color:var(--lime)}
+.tool-pill.featured{border-color:rgba(204,255,0,.35);color:var(--lime);background:rgba(204,255,0,.05)}
+.service-impact{background:rgba(124,58,237,.1);border-left:3px solid var(--v2);padding:1rem 1.2rem}
+.service-impact p{font-size:.85rem;color:#c4b5fd;line-height:1.7;font-style:italic}
+
+/* STACK SECTION */
+.stack-section{padding:7rem 3rem;background:var(--mid)}
+.stack-intro{max-width:700px;margin-bottom:4rem}
+.stack-intro p{font-size:1rem;line-height:1.8;color:#888;margin-top:1rem}
+.stack-intro p strong{color:var(--white);font-weight:500}
+.stack-categories{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.stack-cat{background:var(--card);padding:2rem;border:1px solid rgba(255,255,255,.05)}
+.stack-cat-label{font-family:var(--font-mono);font-size:.65rem;color:var(--v2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid rgba(255,255,255,.07)}
+.stack-items{display:flex;flex-direction:column;gap:.7rem}
+.stack-item{display:flex;align-items:center;justify-content:space-between}
+.stack-item-name{font-size:.88rem;color:var(--white)}
+.stack-item-badge{font-family:var(--font-mono);font-size:.6rem;padding:.2rem .5rem;text-transform:uppercase;letter-spacing:.08em}
+.badge-pro{background:rgba(204,255,0,.1);color:var(--lime);border:1px solid rgba(204,255,0,.25)}
+.badge-reg{background:rgba(255,255,255,.05);color:var(--muted);border:1px solid rgba(255,255,255,.1)}
+
+/* PRICING */
+.pricing-section{padding:7rem 3rem}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3.5rem}
+.price-card{background:var(--card);padding:2.5rem;border:1px solid rgba(255,255,255,.06);position:relative;transition:border-color .3s,transform .3s}
+.price-card:hover{border-color:rgba(204,255,0,.3);transform:translateY(-4px)}
+.price-card.featured{border-color:var(--lime);background:#1a1a00}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.62rem;background:var(--lime);color:#000;padding:.3rem .9rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700;white-space:nowrap}
+.price-name{font-family:var(--font-display);font-size:1.8rem;letter-spacing:.06em;margin-bottom:.4rem}
+.price-desc{font-size:.82rem;color:var(--muted);margin-bottom:1.8rem;line-height:1.6}
+.price-amount{font-family:var(--font-display);font-size:3.5rem;color:var(--lime);line-height:1;margin-bottom:.3rem}
+.price-amount span{font-family:var(--font-mono);font-size:.8rem;color:var(--muted)}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:.8rem;margin:1.8rem 0}
+.price-features li{display:flex;align-items:flex-start;gap:.7rem;font-size:.85rem;color:#aaa}
+.price-features li::before{content:'✓';color:var(--lime);font-family:var(--font-mono);font-size:.75rem;flex-shrink:0;margin-top:.1rem}
+.price-cta{display:block;text-align:center;font-family:var(--font-mono);font-size:.72rem;padding:.85rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;margin-top:auto;transition:background .2s,color .2s}
+.price-cta-ghost{border:1px solid rgba(255,255,255,.15);color:var(--white)}
+.price-cta-ghost:hover{border-color:var(--lime);color:var(--lime)}
+.price-cta-solid{background:var(--lime);color:#000}
+.price-cta-solid:hover{background:#fff}
+
+/* DEVIS */
+.devis-intro{max-width:680px;margin-bottom:3rem;font-size:.98rem;line-height:1.8;color:#888}
+.devis-intro strong{color:var(--white);font-weight:500}
+.devis-example{background:var(--card);border:1px solid rgba(255,255,255,.07);padding:2.5rem;margin-bottom:3rem;position:relative}
+.devis-example-label{position:absolute;top:-12px;left:2rem;font-family:var(--font-mono);font-size:.6rem;background:var(--v2);color:#fff;padding:.25rem .8rem;letter-spacing:.12em;text-transform:uppercase}
+.devis-example-client{display:flex;align-items:baseline;gap:1.2rem;margin-bottom:1.5rem;padding-bottom:1.2rem;border-bottom:1px solid rgba(255,255,255,.06)}
+.devis-client-name{font-family:var(--font-display);font-size:1.8rem;letter-spacing:.05em;color:var(--white)}
+.devis-client-info{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+.devis-table{display:flex;flex-direction:column;gap:0;width:100%}
+.devis-row{display:grid;grid-template-columns:1fr 2fr 140px;gap:1.5rem;padding:.9rem 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:start}
+.devis-header{padding-bottom:.6rem}
+.devis-header span{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.14em}
+.devis-item{font-size:.88rem;color:var(--white);font-weight:500}
+.devis-detail{font-size:.82rem;color:#666;line-height:1.6}
+.devis-price{font-family:var(--font-mono);font-size:.78rem;color:#888;text-align:right}
+.devis-row-total{border-bottom:none;border-top:2px solid rgba(255,255,255,.1);margin-top:.3rem;padding-top:1rem}
+.devis-row-total .devis-item{color:var(--lime);font-family:var(--font-display);font-size:1.1rem;letter-spacing:.05em}
+.devis-price-total{color:var(--lime);font-size:1rem;font-weight:700}
+.devis-example-note{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em;margin-top:1.2rem;font-style:italic}
+.devis-always{margin-bottom:3rem}
+.devis-always-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1rem}
+.devis-always-item{display:flex;align-items:flex-start;gap:1rem;background:var(--card);padding:1.5rem;border:1px solid rgba(255,255,255,.05)}
+.devis-always-icon{font-family:var(--font-mono);color:var(--lime);font-size:.9rem;flex-shrink:0;margin-top:.1rem}
+.devis-always-item strong{display:block;font-size:.9rem;color:var(--white);font-weight:500;margin-bottom:.3rem}
+.devis-always-item p{font-size:.82rem;color:#666;line-height:1.6}
+.devis-cta-row{display:flex;align-items:center;justify-content:space-between;gap:3rem;background:var(--mid);padding:2.5rem;border-left:3px solid var(--lime)}
+.devis-cta-text strong{display:block;font-size:1rem;color:var(--white);font-weight:500;margin-bottom:.4rem}
+.devis-cta-text p{font-size:.88rem;color:#777;line-height:1.6}
+
+/* CTA FINAL */
+.final-cta{padding:8rem 3rem;text-align:center;position:relative;overflow:hidden}
+.final-cta::before{content:'AGIS';font-family:var(--font-display);font-size:25vw;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:transparent;-webkit-text-stroke:1px rgba(204,255,0,.04);pointer-events:none;white-space:nowrap}
+.final-h{font-family:var(--font-display);font-size:clamp(4rem,9vw,8rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem;position:relative}
+.final-h em{color:var(--lime);font-style:normal}
+.final-sub{font-size:1rem;color:#888;max-width:500px;margin:0 auto 3rem;line-height:1.75;position:relative}
+.final-sub strong{color:var(--white);font-weight:500}
+.final-btns{display:flex;justify-content:center;gap:1rem;position:relative}
+.btn-lime{font-family:var(--font-mono);font-size:.8rem;background:var(--lime);color:#000;padding:1rem 2.5rem;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-weight:700;transition:background .2s,transform .15s}
+.btn-lime:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline{font-family:var(--font-mono);font-size:.8rem;border:1px solid rgba(255,255,255,.2);color:var(--white);padding:1rem 2.5rem;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;transition:border-color .2s,transform .15s}
+.btn-outline:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-2px)}
+
+/* FOOTER */
+footer{padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06)}
+.footer-copy{font-family:var(--font-mono);font-size:.68rem;color:var(--muted)}
+.footer-logo{font-family:var(--font-display);font-size:1.2rem;color:rgba(255,255,255,.15)}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}
+  .page-hero,.why-section,.services-section,.stack-section,.pricing-section,.final-cta{padding:5rem 1.5rem}
+  .why-grid{grid-template-columns:1fr}
+  .service-block{grid-template-columns:1fr}
+  .stack-categories{grid-template-columns:1fr}
+  .devis-always-grid{grid-template-columns:1fr}.devis-cta-row{flex-direction:column}.devis-row{grid-template-columns:1fr}
+  .urgency{flex-direction:column;text-align:center;padding:1rem 1.5rem}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">LS.</a>
+  <a href="index.html" class="nav-back">← Retour portfolio</a>
+  <a href="index.html#contact" class="nav-cta">Travailler ensemble →</a>
+</nav>
+
+<!-- URGENCY BANNER -->
+<div class="urgency">
+  <div class="urgency-pulse"></div>
+  <p class="urgency-text"><strong>Disponibilité limitée :</strong> je prends 1 à 2 nouveaux clients par mois maximum. Actuellement : <strong>1 slot disponible</strong> pour avril 2026.</p>
+  <a href="index.html#contact" class="urgency-cta">Réserver un appel</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <p class="hero-tag">Ce que je fais exactement</p>
+  <h1 class="page-title">Pas une<br>agence.<br><em>Mieux.</em></h1>
+  <p class="hero-lead">
+    Vous avez déjà payé une agence qui vous a rendu un PowerPoint et disparu ? 
+    <strong>Moi je reste, j'exécute, et vous voyez les résultats dans vos métriques — pas dans une présentation.</strong>
+    Voici exactement ce que je fais, comment je le fais, et pourquoi ça change tout.
+  </p>
+</section>
+
+<!-- WHY IT MATTERS -->
+<section class="why-section">
+  <p class="section-kicker reveal">Pourquoi c'est critique</p>
+  <h2 class="section-h reveal">En 2026, <em>ne pas être visible</em><br>c'est ne pas exister.</h2>
+  <div class="why-grid">
+    <div class="why-card reveal rd1">
+      <div class="why-card-num">01</div>
+      <div class="accent-line"></div>
+      <h3>Vos concurrents investissent déjà</h3>
+      <p>Pendant que vous hésitez, la marque d'à côté publie 5 Reels par semaine, tourne des Meta Ads et capte votre clientèle. Le marché ne vous attendra pas. Chaque mois de retard = des clients perdus définitivement.</p>
+    </div>
+    <div class="why-card reveal rd2">
+      <div class="why-card-num">02</div>
+      <div class="accent-line"></div>
+      <h3>L'algorithme punit les absents</h3>
+      <p>Instagram, Google, LinkedIn : ces plateformes pénalisent activement les marques qui ne publient pas régulièrement. Un compte inactif 3 semaines perd jusqu'à 60% de sa portée organique. La cohérence n'est pas une option.</p>
+    </div>
+    <div class="why-card reveal rd3">
+      <div class="why-card-num">03</div>
+      <div class="accent-line"></div>
+      <h3>Le client cherche avant d'acheter</h3>
+      <p>92% des consommateurs regardent en ligne avant de franchir la porte. Si votre Google Business est vide, votre site date de 2019 et vous n'avez aucune preuve sociale — ils vont chez quelqu'un d'autre. Simple.</p>
+    </div>
+    <div class="why-card reveal rd4">
+      <div class="why-card-num">04</div>
+      <div class="accent-line"></div>
+      <h3>La publicité payante est votre levier le plus immédiat</h3>
+      <p>Une campagne Meta Ads bien construite peut générer des leads dès J+3. Ce n'est pas de la magie — c'est de la méthode. Mais une mauvaise configuration brûle votre budget en 72h sans résultat. Vous avez besoin de quelqu'un qui sait ce qu'il fait.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES DEEP DIVE -->
+<section class="services-section" id="services">
+  <p class="section-kicker reveal">Les services</p>
+  <h2 class="section-h reveal">Ce que je fais,<br><em>en détail.</em></h2>
+
+  <div class="service-block reveal">
+    <div class="service-block-left">
+      <div class="service-block-num">01</div>
+      <div class="service-block-name">Stratégie<br>&amp; <em>Contenu</em></div>
+    </div>
+    <div class="service-block-right">
+      <p class="service-headline">Pas du contenu pour "être présent". Du contenu qui fait vendre.</p>
+      <p class="service-body">Je construis votre calendrier éditorial complet — sujets, formats, fréquence, copywriting. Chaque post a un objectif : générer des saves, des partages, des DMs, des clics. Je sais comment l'algorithme Instagram classe les contenus en 2026, et j'écris en conséquence. Pas de hashtags inutiles, pas de captions génériques. Des mots qui accrochent dans les 2 premières lignes et qui convertissent.</p>
+      <div class="service-tools-label">Outils &amp; plateformes</div>
+      <div class="tools-row">
+        <span class="tool-pill featured">Instagram</span>
+        <span class="tool-pill featured">LinkedIn</span>
+        <span class="tool-pill">Notion</span>
+        <span class="tool-pill">CapCut</span>
+        <span class="tool-pill">Canva Pro</span>
+        <span class="tool-pill">ChatGPT</span>
+        <span class="tool-pill">Claude</span>
+      </div>
+      <div class="service-impact"><p>"Un contenu bien écrit sans distribution ne sert à rien. Une distribution sans contenu fort brûle votre argent. L'un sans l'autre ne marche pas — c'est pour ça que je fais les deux."</p></div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="service-block-left">
+      <div class="service-block-num">02</div>
+      <div class="service-block-name">Publicité<br><em>Payante</em></div>
+    </div>
+    <div class="service-block-right">
+      <p class="service-headline">Chaque euro investi doit avoir une raison d'être. Je m'assure qu'il en a une.</p>
+      <p class="service-body">Setup complet de vos campagnes Meta Ads et Google Ads : ciblage, créatifs, copywriting, A/B testing, pixel, tracking. Gestion mensuelle avec reporting chiffré. Je ne lance pas une campagne et je l'oublie — j'optimise en continu, semaine par semaine, selon les données réelles. Si ça ne performe pas, je change. Pas d'excuses, pas de jargon : des chiffres.</p>
+      <div class="service-tools-label">Outils &amp; plateformes</div>
+      <div class="tools-row">
+        <span class="tool-pill featured">Meta Ads Manager</span>
+        <span class="tool-pill featured">Google Ads</span>
+        <span class="tool-pill">Google Analytics 4</span>
+        <span class="tool-pill">Meta Pixel</span>
+        <span class="tool-pill">Google Tag Manager</span>
+        <span class="tool-pill">Looker Studio</span>
+      </div>
+      <div class="service-impact"><p>"La plupart des freelances lancent des campagnes basiques et reportent des impressions. Moi je reporte des ventes, des leads et du ROAS. Si le chiffre n'est pas là, on refait."</p></div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="service-block-left">
+      <div class="service-block-num">03</div>
+      <div class="service-block-name">Vidéo<br><em>Production</em></div>
+    </div>
+    <div class="service-block-right">
+      <p class="service-headline">La vidéo n'est plus optionnelle. C'est le format qui domine tous les algorithmes.</p>
+      <p class="service-body">Reels, études de cas, showreels, vidéos talking-head, motion design. Je gère de A à Z : script, direction créative, montage, sous-titres, optimisation format. J'utilise l'IA générative (Kling AI, Runway Gen-3, Banana Pro) pour produire des visuels cinématiques premium sans budget de production hollywoodien. Le résultat : du contenu qui arrête le scroll dans les 2 premières secondes.</p>
+      <div class="service-tools-label">Outils &amp; plateformes</div>
+      <div class="tools-row">
+        <span class="tool-pill featured">Kling AI</span>
+        <span class="tool-pill featured">Runway Gen-3</span>
+        <span class="tool-pill featured">Banana Pro</span>
+        <span class="tool-pill">CapCut</span>
+        <span class="tool-pill">DaVinci Resolve</span>
+        <span class="tool-pill">Adobe Premiere</span>
+        <span class="tool-pill">Midjourney</span>
+      </div>
+      <div class="service-impact"><p>"Les marques qui publient des Reels régulièrement ont une portée organique 3 à 5× supérieure aux marques qui publient des photos statiques. Ce n'est pas une opinion, c'est la donnée Meta de 2025."</p></div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="service-block-left">
+      <div class="service-block-num">04</div>
+      <div class="service-block-name">Web<br><em>Development</em></div>
+    </div>
+    <div class="service-block-right">
+      <p class="service-headline">Votre site est votre commercial disponible 24h/24. Est-ce qu'il fait son job ?</p>
+      <p class="service-body">Sites vitrines, landing pages, e-commerce. Je développe sur mesure (HTML/CSS/JS) ou sur les plateformes que vous utilisez déjà. Un site lent, non optimisé mobile ou sans SEO de base vous coûte des clients chaque jour sans que vous le sachiez. Je diagnostique, je corrige, je construis. <strong>Et je maintiens</strong> — mises à jour, évolutions, corrections, suivi mensuel pour que votre site reste performant dans le temps.</p>
+      <div class="service-tools-label">Plateformes &amp; technologies</div>
+      <div class="tools-row">
+        <span class="tool-pill featured">Shopify</span>
+        <span class="tool-pill featured">WordPress</span>
+        <span class="tool-pill featured">Webflow</span>
+        <span class="tool-pill">HTML / CSS / JS</span>
+        <span class="tool-pill">WooCommerce</span>
+        <span class="tool-pill">Elementor</span>
+        <span class="tool-pill">Framer</span>
+        <span class="tool-pill">Google Search Console</span>
+        <span class="tool-pill">SEMrush</span>
+        <span class="tool-pill">Maintenance mensuelle</span>
+      </div>
+      <div class="service-impact"><p>"Un site Shopify mal configuré perd en moyenne 70% de ses visiteurs avant qu'ils arrivent à la page produit. Je traque chaque friction et je l'élimine."</p></div>
+    </div>
+  </div>
+
+  <div class="service-block reveal">
+    <div class="service-block-left">
+      <div class="service-block-num">05</div>
+      <div class="service-block-name">Google<br><em>Business</em></div>
+    </div>
+    <div class="service-block-right">
+      <p class="service-headline">Le premier endroit que vos prospects regardent. Souvent le plus négligé.</p>
+      <p class="service-body">Optimisation complète de votre fiche Google Business Profile : informations, catégories, photos, posts réguliers, gestion des avis, réponses. Une fiche GBP bien optimisée peut doubler votre visibilité locale sur Google Maps sans dépenser un euro en pub. C'est du référencement local gratuit que 80% des entreprises n'exploitent pas.</p>
+      <div class="service-tools-label">Outils</div>
+      <div class="tools-row">
+        <span class="tool-pill featured">Google Business Profile</span>
+        <span class="tool-pill">Google Maps</span>
+        <span class="tool-pill">Google Analytics</span>
+        <span class="tool-pill">BrightLocal</span>
+      </div>
+      <div class="service-impact"><p>"Votre fiche GBP apparaît avant votre site dans 90% des recherches locales. Si elle n'est pas parfaite, vous perdez du trafic qualifié chaque jour."</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section class="stack-section">
+  <p class="section-kicker reveal">L'arsenal</p>
+  <h2 class="section-h reveal">Les outils que<br><em>je maîtrise.</em></h2>
+  <div class="stack-intro reveal">
+    <p>Ce n'est pas une liste pour impressionner. <strong>Chaque outil a un rôle précis dans ma méthode.</strong> Je ne recommande jamais un outil à un client si je ne l'utilise pas moi-même au quotidien. Pas de théorie — de la pratique.</p>
+  </div>
+  <div class="stack-categories">
+    <div class="stack-cat reveal rd1">
+      <div class="stack-cat-label">Social Media &amp; Contenu</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Instagram / Meta Suite</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">LinkedIn</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Pinterest</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">YouTube / Shorts</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">TikTok</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Canva Pro</span><span class="stack-item-badge badge-pro">Expert</span></div>
+      </div>
+    </div>
+    <div class="stack-cat reveal rd2">
+      <div class="stack-cat-label">Publicité &amp; Analytics</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Meta Ads Manager</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Google Ads</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Google Analytics 4</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Google Tag Manager</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Looker Studio</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">SEMrush</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+      </div>
+    </div>
+    <div class="stack-cat reveal rd3">
+      <div class="stack-cat-label">Web &amp; E-commerce</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Shopify</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">WordPress</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Webflow</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Framer</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">WooCommerce</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">HTML / CSS / JS</span><span class="stack-item-badge badge-pro">Expert</span></div>
+      </div>
+    </div>
+    <div class="stack-cat reveal rd1">
+      <div class="stack-cat-label">Vidéo &amp; IA Générative</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Kling AI</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Runway Gen-3</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Banana Pro</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">CapCut</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Midjourney</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">DaVinci Resolve</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+      </div>
+    </div>
+    <div class="stack-cat reveal rd2">
+      <div class="stack-cat-label">Gestion &amp; Organisation</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Notion</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Airtable</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Trello</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Slack</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Zapier</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Make (Integromat)</span><span class="stack-item-badge badge-reg">Intermédiaire</span></div>
+      </div>
+    </div>
+    <div class="stack-cat reveal rd3">
+      <div class="stack-cat-label">IA &amp; Productivité</div>
+      <div class="stack-items">
+        <div class="stack-item"><span class="stack-item-name">Claude (Anthropic)</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">ChatGPT / GPT-4o</span><span class="stack-item-badge badge-pro">Expert</span></div>
+        <div class="stack-item"><span class="stack-item-name">Perplexity</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Figma</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+        <div class="stack-item"><span class="stack-item-name">Adobe Suite</span><span class="stack-item-badge badge-reg">Avancé</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section">
+  <p class="section-kicker reveal">Tarifs</p>
+  <h2 class="section-h reveal">Sur devis.<br><em>Zéro surprise.</em></h2>
+
+  <div class="devis-intro reveal">
+    <p>Chaque projet est différent — je ne vends pas des forfaits génériques. Je construis un devis précis basé sur ce dont vous avez réellement besoin, pas sur ce qui est le plus simple à facturer. <strong>Devis gratuit sous 48h, valable 30 jours.</strong></p>
+  </div>
+
+  <!-- EXEMPLE RÉEL — inspiré Global Saké -->
+  <div class="devis-example reveal">
+    <div class="devis-example-label">Exemple de mission — client réel</div>
+    <div class="devis-example-client">
+      <span class="devis-client-name">Mission client — confidentiel</span>
+      <span class="devis-client-info">Paris · Mars 2026</span>
+    </div>
+    <div class="devis-table">
+      <div class="devis-row devis-header">
+        <span>Prestation</span>
+        <span>Détail</span>
+        <span>Montant HT</span>
+      </div>
+      <div class="devis-row">
+        <span class="devis-item">Tournage & montage vidéo</span>
+        <span class="devis-detail">4 sessions terrain · 16 vidéos · 32 fichiers (YouTube 16:9 + Reels 9:16) · révisions illimitées</span>
+        <span class="devis-price">Inclus forfait</span>
+      </div>
+      <div class="devis-row">
+        <span class="devis-item">Mise en place Google Ads</span>
+        <span class="devis-detail">Création campagnes · ciblage · suivi conversions · ~4h de travail</span>
+        <span class="devis-price">Inclus forfait</span>
+      </div>
+      <div class="devis-row">
+        <span class="devis-item">Maintenance site web</span>
+        <span class="devis-detail">Mises à jour, corrections, évolutions majeures · suivi mensuel</span>
+        <span class="devis-price">Sur devis</span>
+      </div>
+      <div class="devis-row devis-row-total">
+        <span class="devis-item">Total HT</span>
+        <span class="devis-detail">Rapport mensuel inclus · Période : mars 2026</span>
+        <span class="devis-price devis-price-total">1 250 €</span>
+      </div>
+    </div>
+    <p class="devis-example-note">Ce type de mission est établi sur devis personnalisé selon le volume, la fréquence et les plateformes concernées.</p>
+  </div>
+
+  <!-- CE QUI EST TOUJOURS INCLUS -->
+  <div class="devis-always reveal">
+    <p class="section-kicker" style="margin-bottom:1.5rem">Dans chaque devis, toujours inclus</p>
+    <div class="devis-always-grid">
+      <div class="devis-always-item">
+        <span class="devis-always-icon">→</span>
+        <div>
+          <strong>Rapport mensuel</strong>
+          <p>Résultats chiffrés remis en fin de mois. Ce qui fonctionne, ce qui s'optimise, ce qui vient.</p>
+        </div>
+      </div>
+      <div class="devis-always-item">
+        <span class="devis-always-icon">→</span>
+        <div>
+          <strong>Révisions illimitées</strong>
+          <p>Sur les livrables créatifs (vidéo, visuels, copys). Pas de compteur de retours.</p>
+        </div>
+      </div>
+      <div class="devis-always-item">
+        <span class="devis-always-icon">→</span>
+        <div>
+          <strong>Interlocuteur unique</strong>
+          <p>Vous parlez directement à moi — pas à un account manager qui relaie à un autre.</p>
+        </div>
+      </div>
+      <div class="devis-always-item">
+        <span class="devis-always-icon">→</span>
+        <div>
+          <strong>Délai de paiement 30 jours</strong>
+          <p>Facturation à réception, règlement à 30 jours. Contrat clair, conditions fixes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="devis-cta-row reveal">
+    <div class="devis-cta-text">
+      <strong>Besoin d'un devis ?</strong>
+      <p>Décrivez votre projet en quelques lignes — je reviens avec un devis détaillé sous 48h. Aucun engagement.</p>
+    </div>
+    <a href="index.html#contact" class="btn-lime">Demander un devis gratuit →</a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2 class="final-h reveal">Votre<br>concurrent<br><em>n'attend pas.</em></h2>
+  <p class="final-sub reveal">Chaque semaine sans stratégie digitale est une semaine offerte à la concurrence. <strong>Je prends 1 nouveau client ce mois-ci. Le slot suivant : mai 2026.</strong></p>
+  <div class="final-btns reveal">
+    <a href="index.html#contact" class="btn-lime">Réserver le slot disponible →</a>
+    <a href="pov.html" class="btn-outline">Lire mon point de vue</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Laksman Sivaruban</span>
+  <span class="footer-logo">LS.</span>
+  <span class="footer-copy">Auto-entrepreneur · Houilles 78800</span>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{
+  cursor.style.transform=`translate(${e.clientX-5}px,${e.clientY-5}px)`;
+  ring.style.transform=`translate(${e.clientX-18}px,${e.clientY-18}px)`;
+});
+document.querySelectorAll('a,button,.price-card,.service-card,.why-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform+=' scale(2.5)';ring.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform=cursor.style.transform.replace(' scale(2.5)','');ring.style.opacity='1'});
+});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>

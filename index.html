@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laksman Sivaruban — Création de sites web & Photographie</title>
+<meta name="description" content="Expert en création de sites web et photographe professionnel à Paris. Stratégie digitale, vidéo et direction artistique pour marques premium.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230F0F0F'/><rect x='4' y='4' width='24' height='24' rx='4' fill='none' stroke='%23CCFF00' stroke-width='1.5'/><text x='16' y='22' text-anchor='middle' font-family='Georgia,serif' font-size='16' font-weight='900' fill='%23CCFF00'>LS</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:#7C3AED;--v2:#A855F7;--lime:#CCFF00;--white:#F8F8F2;--off:#0F0F0F;--mid:#1A1A1A;--card:#202020;--muted:#555;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--off);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none}
+#cursor{position:fixed;width:10px;height:10px;background:var(--lime);border-radius:50%;pointer-events:none;z-index:9999;transition:transform .12s;mix-blend-mode:exclusion}
+#cursor-ring{position:fixed;width:38px;height:38px;border:1.5px solid var(--lime);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .38s cubic-bezier(.2,1,.2,1),opacity .2s;mix-blend-mode:exclusion}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:.4}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(14px);background:rgba(15,15,15,.75);border-bottom:1px solid rgba(255,255,255,.04)}
+.nav-logo{font-family:var(--font-display);font-size:1.4rem;letter-spacing:.1em;color:var(--lime);text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-family:var(--font-mono);font-size:.7rem;color:var(--muted);text-decoration:none;text-transform:uppercase;letter-spacing:.15em;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:var(--font-mono);font-size:.7rem;background:var(--lime);color:#000;padding:.45rem 1.1rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;transition:background .2s}
+.nav-cta:hover{background:#fff}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:10rem 3rem 3rem;position:relative;overflow:hidden}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.75rem;color:var(--v2);letter-spacing:.22em;text-transform:uppercase;margin-bottom:1.2rem;opacity:0;animation:fu .7s .2s forwards}
+.hero-title{font-family:var(--font-display);font-size:clamp(4.5rem,11vw,10.5rem);line-height:.88;letter-spacing:.02em;z-index:2;position:relative}
+.hero-title .line{overflow:hidden;display:block}
+.hero-title .line span{display:block;opacity:0;transform:translateY(110%);animation:su .8s cubic-bezier(.16,1,.3,1) forwards}
+.hero-title .line:nth-child(1) span{animation-delay:.3s}
+.hero-title .line:nth-child(2) span{animation-delay:.44s}
+.hero-title .line:nth-child(3) span{animation-delay:.58s}
+.accent{color:var(--lime)}
+@keyframes su{to{opacity:1;transform:translateY(0)}}
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* HERO — specialités badge */
+.hero-specs{display:flex;align-items:center;gap:1rem;margin-top:2rem;opacity:0;animation:fu .6s .85s forwards;flex-wrap:wrap}
+.spec-main{font-family:var(--font-display);font-size:1.3rem;letter-spacing:.06em;color:var(--lime)}
+.spec-sep{color:var(--muted);font-size:1.2rem}
+.spec-secondary{font-family:var(--font-mono);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+.hero-sub{max-width:500px;font-size:1rem;line-height:1.8;color:#888;margin-top:1.5rem;opacity:0;animation:fu .7s 1s forwards}
+.hero-sub strong{color:var(--white);font-weight:500}
+.hero-pills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem;opacity:0;animation:fu .6s 1.1s forwards}
+.pill{font-family:var(--font-mono);font-size:.62rem;padding:.25rem .75rem;border:1px solid rgba(255,255,255,.1);color:#777;letter-spacing:.07em;text-transform:uppercase;transition:all .2s}
+.pill:hover{border-color:rgba(204,255,0,.3);color:rgba(204,255,0,.8)}
+.pill.featured{border-color:rgba(204,255,0,.3);color:rgba(204,255,0,.8)}
+.hero-ctas{display:flex;gap:1rem;margin-top:2.5rem;opacity:0;animation:fu .7s 1.2s forwards;flex-wrap:wrap}
+.btn-lime{font-family:var(--font-mono);font-size:.78rem;background:var(--lime);color:#000;padding:.85rem 2rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;transition:background .2s,transform .15s}
+.btn-lime:hover{background:#fff;transform:translateY(-2px)}
+.btn-ghost{font-family:var(--font-mono);font-size:.78rem;border:1px solid rgba(255,255,255,.15);color:var(--white);padding:.85rem 2rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;transition:all .2s}
+.btn-ghost:hover{border-color:var(--lime);color:var(--lime);transform:translateY(-2px)}
+.hero-stats{display:flex;gap:3rem;margin-top:4rem;opacity:0;animation:fu .7s 1.4s forwards;flex-wrap:wrap}
+.stat-num{font-family:var(--font-display);font-size:2.8rem;color:var(--lime);line-height:1}
+.stat-label{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:.2rem}
+.hero-scroll{position:absolute;bottom:2.5rem;left:3rem;font-family:var(--font-mono);font-size:.67rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;display:flex;align-items:center;gap:.7rem}
+.hero-scroll::before{content:'';width:36px;height:1px;background:var(--muted)}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--lime);padding:.6rem 0;overflow:hidden}
+.marquee-track{display:flex;gap:2.5rem;white-space:nowrap;animation:mq 20s linear infinite}
+.marquee-track span{font-family:var(--font-display);font-size:.95rem;letter-spacing:.15em;color:#000;text-transform:uppercase}
+.mqdot{color:#7C3AED}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* EXPERTISE SECTION — 2 grandes cartes */
+.expertise-section{padding:8rem 3rem}
+.section-kicker{font-family:var(--font-mono);font-size:.7rem;color:var(--v2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem}
+.section-h{font-family:var(--font-display);font-size:clamp(3.2rem,6.5vw,5.8rem);line-height:.93;letter-spacing:.02em;margin-bottom:3.5rem}
+.section-h em{color:var(--lime);font-style:normal}
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.exp-card{background:var(--card);padding:3rem;border:1px solid rgba(255,255,255,.05);position:relative;overflow:hidden;transition:border-color .3s}
+.exp-card:hover{border-color:rgba(204,255,0,.2)}
+.exp-card.main{border-color:rgba(204,255,0,.15)}
+.exp-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.6rem;padding:.25rem .75rem;margin-bottom:1.5rem;letter-spacing:.12em;text-transform:uppercase}
+.badge-expert{background:rgba(204,255,0,.08);color:var(--lime);border:1px solid rgba(204,255,0,.25)}
+.badge-service{background:rgba(168,85,247,.08);color:var(--v2);border:1px solid rgba(168,85,247,.2)}
+.exp-title{font-family:var(--font-display);font-size:3rem;letter-spacing:.04em;line-height:.95;margin-bottom:1rem}
+.exp-title em{color:var(--lime);font-style:normal}
+.exp-body{font-size:.9rem;line-height:1.8;color:#777;margin-bottom:1.8rem}
+.exp-body strong{color:#bbb;font-weight:500}
+.exp-tools{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem}
+.exp-tool{font-family:var(--font-mono);font-size:.6rem;padding:.22rem .65rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#666;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+.exp-card:hover .exp-tool{border-color:rgba(204,255,0,.15);color:rgba(204,255,0,.5)}
+.exp-link{font-family:var(--font-mono);font-size:.7rem;color:var(--lime);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.5rem;transition:gap .2s}
+.exp-link:hover{gap:.9rem}
+.exp-bg-word{position:absolute;bottom:-1.5rem;right:-1rem;font-family:var(--font-display);font-size:7rem;color:rgba(255,255,255,.025);line-height:1;pointer-events:none}
+
+/* SERVICES COMPLÉMENTAIRES */
+.services-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05)}
+.svc-card{background:var(--off);padding:2rem 1.5rem;transition:background .3s;position:relative}
+.svc-card:hover{background:var(--card)}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--v2);transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.svc-card:hover::after{transform:scaleX(1)}
+.svc-num{font-family:var(--font-mono);font-size:.6rem;color:var(--v2);letter-spacing:.15em;margin-bottom:1rem}
+.svc-title{font-family:var(--font-display);font-size:1.5rem;letter-spacing:.05em;margin-bottom:.6rem}
+.svc-desc{font-size:.82rem;line-height:1.7;color:#666}
+
+/* WHY ONE PERSON */
+.why-section{padding:8rem 3rem;background:var(--mid)}
+.why-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:6rem;align-items:start}
+.why-h{font-family:var(--font-display);font-size:clamp(3rem,5.5vw,5rem);line-height:.93;letter-spacing:.02em;margin-bottom:1.8rem}
+.why-h em{color:var(--lime);font-style:normal}
+.why-body{font-size:.95rem;line-height:1.85;color:#777;margin-bottom:2rem}
+.why-body strong{color:var(--white);font-weight:500}
+.why-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
+.why-list li{display:flex;align-items:flex-start;gap:.75rem;font-size:.88rem;color:#888;line-height:1.65}
+.why-list li::before{content:'→';color:var(--lime);font-family:var(--font-mono);flex-shrink:0;margin-top:.05rem}
+.why-quote{background:var(--off);padding:2rem;border-left:3px solid var(--lime);margin-bottom:1.5rem}
+.why-quote p{font-size:1rem;line-height:1.75;color:#ccc;font-style:italic}
+.why-stats{display:flex;flex-direction:column;gap:1rem}
+.why-stat-box{background:var(--off);padding:1.6rem 1.8rem;border-left:3px solid var(--v)}
+.why-stat-num{font-family:var(--font-display);font-size:3.2rem;color:var(--lime);line-height:1}
+.why-stat-label{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;margin-top:.3rem}
+
+/* CASE STUDY */
+.case-section{padding:8rem 3rem}
+.case-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.case-visual{position:relative}
+.case-mockup{background:linear-gradient(135deg,#2d0068 0%,#0d0020 100%);padding:3rem 2.5rem;position:relative;overflow:hidden}
+.case-mockup::before{content:'GLOBAL SAKÉ';font-family:var(--font-display);font-size:5rem;position:absolute;bottom:-1rem;left:-1rem;color:rgba(255,255,255,.04);pointer-events:none;line-height:1}
+.case-logo{font-family:var(--font-display);font-size:2.4rem;letter-spacing:.1em;color:var(--white);margin-bottom:2rem}
+.case-metrics{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.metric-box{background:rgba(255,255,255,.06);padding:1.2rem;border-left:3px solid var(--lime)}
+.metric-val{font-family:var(--font-display);font-size:2.2rem;color:var(--lime)}
+.metric-lbl{font-family:var(--font-mono);font-size:.6rem;color:#999;text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem}
+.case-tag{position:absolute;top:-1.4rem;right:-1.4rem;background:var(--lime);color:#000;font-family:var(--font-mono);font-size:.65rem;padding:.55rem .9rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.case-body{color:#777;font-size:.93rem;line-height:1.85;margin-bottom:2rem}
+.case-list{list-style:none;display:flex;flex-direction:column;gap:.75rem}
+.case-list li{display:flex;align-items:flex-start;gap:.8rem;font-size:.88rem;color:#bbb}
+.case-list li::before{content:'→';color:var(--lime);font-family:var(--font-mono);flex-shrink:0}
+
+/* PROJECTS */
+.case-section{padding:8rem 3rem}
+.proj-featured{display:grid;grid-template-columns:1.1fr 1fr;gap:4rem;align-items:center;margin-bottom:4rem;padding-bottom:4rem;border-bottom:1px solid rgba(255,255,255,.06)}
+/* PROJECTS — duo grande carte + ref */
+.case-section{padding:8rem 3rem}
+.proj-duo{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem}
+.proj-big-card{background:var(--card);border:1px solid rgba(255,255,255,.05);overflow:hidden;transition:border-color .3s,transform .3s}
+.proj-big-card:hover{border-color:rgba(204,255,0,.25);transform:translateY(-3px)}
+.proj-big-visual{min-height:220px;position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:2rem;overflow:hidden}
+.proj-iconic-bg{background:linear-gradient(135deg,#1a0012 0%,#3d0030 50%,#120008 100%)}
+.proj-sake-bg{background:linear-gradient(135deg,#0d0020 0%,#2d0060 50%,#0a0018 100%)}
+.proj-big-bgword{position:absolute;bottom:-1.5rem;right:-1rem;font-family:var(--font-display);font-size:6.5rem;color:rgba(255,255,255,.05);line-height:1;pointer-events:none;white-space:nowrap}
+.proj-big-visual-inner{position:relative;z-index:1}
+.proj-big-logo{font-family:var(--font-display);font-size:2rem;letter-spacing:.1em;color:var(--white);margin-bottom:.5rem}
+.proj-big-tagline{font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1.2rem}
+.proj-big-chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.proj-big-chips span{font-family:var(--font-mono);font-size:.58rem;padding:.2rem .6rem;border:1px solid rgba(204,255,0,.2);color:rgba(204,255,0,.6);letter-spacing:.07em;text-transform:uppercase}
+.proj-big-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-top:.5rem}
+.proj-big-metric{background:rgba(255,255,255,.06);padding:.8rem;border-left:2px solid var(--lime)}
+.proj-big-val{font-family:var(--font-display);font-size:1.8rem;color:var(--lime);display:block;line-height:1}
+.proj-big-lbl{font-family:var(--font-mono);font-size:.55rem;color:#888;text-transform:uppercase;letter-spacing:.1em;margin-top:.2rem;display:block}
+.proj-big-badge{position:relative;z-index:1;align-self:flex-end;font-family:var(--font-mono);font-size:.6rem;background:var(--lime);color:#000;padding:.28rem .75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;align-self:flex-end}
+.proj-big-body{padding:2rem}
+.proj-big-kicker{font-family:var(--font-mono);font-size:.62rem;color:var(--v2);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.6rem}
+.proj-big-title{font-family:var(--font-display);font-size:2.6rem;letter-spacing:.04em;line-height:.92;margin-bottom:1rem}
+.proj-big-title em{color:var(--lime);font-style:normal}
+.proj-big-desc{font-size:.88rem;line-height:1.78;color:#666;margin-bottom:1.2rem}
+.proj-big-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin-bottom:1.4rem}
+.proj-big-list li{display:flex;align-items:flex-start;gap:.65rem;font-size:.83rem;color:#888;line-height:1.55}
+.proj-big-list li::before{content:'→';color:var(--lime);font-family:var(--font-mono);flex-shrink:0;font-size:.7rem;margin-top:.05rem}
+.proj-live-link{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--font-mono);font-size:.7rem;color:var(--lime);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;margin-top:1.2rem;border-bottom:1px solid rgba(204,255,0,.25);padding-bottom:.2rem;transition:gap .2s,border-color .2s}
+.proj-live-link:hover{gap:.9rem;border-color:var(--lime)}
+.proj-big-tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.proj-tag{font-family:var(--font-mono);font-size:.58rem;padding:.2rem .55rem;border:1px solid rgba(255,255,255,.08);color:#666;letter-spacing:.06em;text-transform:uppercase;transition:all .2s}
+.proj-big-card:hover .proj-tag{border-color:rgba(204,255,0,.15);color:rgba(204,255,0,.5)}
+
+/* Bubbleride — référence discrète */
+.proj-ref-row{display:flex;align-items:center;gap:1rem;flex-wrap:wrap}
+.proj-ref-label{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.18em;white-space:nowrap;flex-shrink:0}
+.proj-ref-card{flex:1;min-width:220px;background:var(--card);border:1px solid rgba(255,255,255,.05);display:flex;flex-direction:column;gap:.6rem;padding:1.1rem 1.4rem;transition:border-color .3s}
+.proj-ref-card:hover{border-color:rgba(204,255,0,.2)}
+.proj-ref-dots{display:flex;align-items:center;gap:.35rem;flex-shrink:0}
+.proj-ref-dots span{width:7px;height:7px;border-radius:50%;background:#333;flex-shrink:0}
+.proj-ref-dots span:first-child{background:#ef4444}
+.proj-ref-dots span:nth-child(2){background:#f59e0b}
+.proj-ref-dots span:nth-child(3){background:#10b981}
+.proj-ref-url{display:none}
+.proj-ref-info{display:flex;flex-direction:column;gap:.25rem}
+.proj-ref-name{font-family:var(--font-display);font-size:1.1rem;letter-spacing:.05em;line-height:1;color:var(--white)}
+.proj-ref-desc{font-family:var(--font-mono);font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;line-height:1.5}
+.proj-ref-link{font-family:var(--font-mono);font-size:.65rem;color:var(--lime);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;align-self:flex-start;transition:opacity .2s}
+.proj-ref-link:hover{opacity:.7}
+.proj-ref-link{font-family:var(--font-mono);font-size:.68rem;color:var(--lime);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;flex-shrink:0;transition:opacity .2s}
+.proj-ref-link:hover{opacity:.7}
+
+/* PROCESS */
+.process-section{padding:8rem 3rem;background:var(--mid)}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:4rem;counter-reset:step}
+.process-step{position:relative;counter-increment:step}
+.process-step::before{content:counter(step,decimal-leading-zero);font-family:var(--font-display);font-size:5rem;color:rgba(204,255,0,.06);position:absolute;top:-1.5rem;left:0;line-height:1;pointer-events:none}
+.process-connector{position:absolute;top:1.2rem;left:calc(100% + .5rem);width:calc(100% - 1rem);height:1px;background:linear-gradient(to right,rgba(204,255,0,.25),rgba(204,255,0,.03))}
+.process-step:last-child .process-connector{display:none}
+.process-step-inner{padding-top:3rem}
+.process-step-title{font-family:var(--font-display);font-size:1.6rem;letter-spacing:.05em;margin-bottom:.7rem}
+.process-step-desc{font-size:.85rem;color:#666;line-height:1.72}
+
+/* CONTACT */
+.contact-section{padding:8rem 3rem;background:var(--v);position:relative;overflow:hidden}
+.contact-section::before{content:'CONTACT';font-family:var(--font-display);font-size:20vw;position:absolute;bottom:-3vw;right:-2vw;color:rgba(0,0,0,.18);line-height:1;pointer-events:none}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;position:relative;z-index:1}
+.contact-title{font-family:var(--font-display);font-size:clamp(3.5rem,7vw,6rem);line-height:.93;letter-spacing:.02em;margin-bottom:1.5rem}
+.contact-sub{font-size:.98rem;line-height:1.75;color:rgba(255,255,255,.65);margin-bottom:2.5rem}
+.contact-links{display:flex;flex-direction:column;gap:.9rem}
+.contact-link{display:flex;align-items:center;gap:1rem;font-family:var(--font-mono);font-size:.8rem;color:rgba(255,255,255,.85);text-decoration:none;transition:color .2s}
+.contact-link:hover{color:var(--lime)}
+.c-icon{width:36px;height:36px;border:1px solid rgba(255,255,255,.25);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;font-family:var(--font-mono)}
+
+/* FORM */
+.contact-form{display:flex;flex-direction:column;gap:.9rem}
+.form-field{display:flex;flex-direction:column;gap:.35rem}
+.form-label{font-family:var(--font-mono);font-size:.6rem;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.16em}
+.form-input{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.13);color:var(--white);padding:.85rem 1rem;font-family:var(--font-body);font-size:.92rem;outline:none;transition:border-color .2s;width:100%}
+.form-input:focus{border-color:var(--lime)}
+.form-input::placeholder{color:rgba(255,255,255,.25)}
+textarea.form-input{resize:vertical;min-height:110px}
+select.form-input{appearance:none;font-family:var(--font-mono);font-size:.72rem;cursor:none;color:rgba(255,255,255,.6)}
+select.form-input option{background:#1a0040;color:var(--white)}
+.form-btn{font-family:var(--font-mono);font-size:.78rem;background:var(--lime);color:#000;padding:.95rem 2rem;border:none;cursor:none;text-transform:uppercase;letter-spacing:.12em;font-weight:700;transition:background .2s,transform .15s;align-self:flex-start;margin-top:.4rem}
+.form-btn:hover{background:#fff;transform:translateY(-2px)}
+.form-success{display:none;background:rgba(204,255,0,.1);border:1px solid rgba(204,255,0,.3);padding:.9rem 1.1rem;font-family:var(--font-mono);font-size:.7rem;color:var(--lime);letter-spacing:.08em;text-transform:uppercase}
+
+footer{padding:2.2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-family:var(--font-mono);font-size:.65rem;color:var(--muted)}
+.footer-logo{font-family:var(--font-display);font-size:1.2rem;color:rgba(255,255,255,.12)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}.nav-links{display:none}
+  .hero,.expertise-section,.why-section,.case-section,.process-section{padding:5rem 1.5rem}
+  .contact-section{padding:5rem 1.5rem}
+  .exp-grid,.why-inner,.proj-featured,.contact-inner{grid-template-columns:1fr;gap:3rem}
+  .proj-featured-reverse{direction:ltr}
+  .proj-small-card{grid-template-columns:1fr}
+  .services-row{grid-template-columns:1fr 1fr}
+  .process-steps{grid-template-columns:1fr 1fr}
+  footer{flex-direction:column;gap:1rem;padding:2rem 1.5rem;text-align:center}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">LS.</a>
+  <ul class="nav-links">
+    <li><a href="#expertise">Expertises</a></li>
+    <li><a href="#work">Projets</a></li>
+    <li><a href="showreel.html">Showreel</a></li>
+    <li><a href="#process">Méthode</a></li>
+    <li><a href="pov.html">Point de vue</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Travailler ensemble →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Paris · Expert Web & Photographe · Créatif digital</p>
+  <h1 class="hero-title">
+    <span class="line"><span>LAKSMAN</span></span>
+    <span class="line"><span>SIVARUBAN</span></span>
+    <span class="line"><span class="accent">CRÉATIF.</span></span>
+  </h1>
+  <div class="hero-specs">
+    <span class="spec-main">Sites web</span>
+    <span class="spec-sep">+</span>
+    <span class="spec-main">Photographie</span>
+    <span class="spec-sep">·</span>
+    <span class="spec-secondary">Vidéo · Direction artistique · Stratégie digitale</span>
+  </div>
+  <p class="hero-sub">
+    <strong>Un seul interlocuteur pour tout ce qui construit l'image d'une marque.</strong> De la conception de votre site à la prise de vue, en passant par la stratégie digitale — je livre ce que la plupart des agences sous-traitent.
+  </p>
+  <div class="hero-pills">
+    <span class="pill featured">Création de sites web</span>
+    <span class="pill featured">Photographie</span>
+    <span class="pill">Shopify</span>
+    <span class="pill">WordPress</span>
+    <span class="pill">Webflow</span>
+    <span class="pill">Vidéo & Réalisation</span>
+    <span class="pill">Meta Ads</span>
+    <span class="pill">Google Ads</span>
+    <span class="pill">Direction artistique</span>
+    <span class="pill">IA Générative</span>
+  </div>
+  <div class="hero-ctas">
+    <a href="#expertise" class="btn-lime">Voir mes expertises</a>
+    <a href="#contact" class="btn-ghost">Discuter d'un projet</a>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">Web</div>
+      <div class="stat-label">Spécialité #1</div>
+    </div>
+    <div>
+      <div class="stat-num">Photo</div>
+      <div class="stat-label">Spécialité #2</div>
+    </div>
+    <div>
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Clients actifs</div>
+    </div>
+    <div>
+      <div class="stat-num">Paris</div>
+      <div class="stat-label">Île-de-France</div>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Sites web</span><span class="mqdot">◆</span>
+    <span>Photographie</span><span class="mqdot">◆</span>
+    <span>Shopify</span><span class="mqdot">◆</span>
+    <span>WordPress</span><span class="mqdot">◆</span>
+    <span>Webflow</span><span class="mqdot">◆</span>
+    <span>Vidéo</span><span class="mqdot">◆</span>
+    <span>Direction artistique</span><span class="mqdot">◆</span>
+    <span>Meta Ads</span><span class="mqdot">◆</span>
+    <span>Google Ads</span><span class="mqdot">◆</span>
+    <span>IA Générative</span><span class="mqdot">◆</span>
+    <span>Sites web</span><span class="mqdot">◆</span>
+    <span>Photographie</span><span class="mqdot">◆</span>
+    <span>Shopify</span><span class="mqdot">◆</span>
+    <span>WordPress</span><span class="mqdot">◆</span>
+    <span>Webflow</span><span class="mqdot">◆</span>
+    <span>Vidéo</span><span class="mqdot">◆</span>
+    <span>Direction artistique</span><span class="mqdot">◆</span>
+    <span>Meta Ads</span><span class="mqdot">◆</span>
+    <span>Google Ads</span><span class="mqdot">◆</span>
+    <span>IA Générative</span><span class="mqdot">◆</span>
+  </div>
+</div>
+
+<!-- EXPERTISES -->
+<section class="expertise-section" id="expertise">
+  <p class="section-kicker reveal">Ce que je fais mieux que quiconque</p>
+  <h2 class="section-h reveal">Deux expertises.<br><em>Un résultat cohérent.</em></h2>
+
+  <div class="exp-grid">
+    <!-- WEB -->
+    <div class="exp-card main reveal rd1">
+      <div class="exp-badge badge-expert">Expert confirmé</div>
+      <h3 class="exp-title">Création<br>de <em>sites web</em></h3>
+      <p class="exp-body">
+        Votre site est votre commercial disponible 24h/24. <strong>Je conçois et développe des sites qui convertissent</strong> — vitrines, e-commerces, portfolios, landing pages. Sur mesure en code ou sur les plateformes que vous utilisez déjà. Rapide, optimisé SEO, premium.
+      </p>
+      <div class="exp-tools">
+        <span class="exp-tool">Shopify</span>
+        <span class="exp-tool">WordPress</span>
+        <span class="exp-tool">Webflow</span>
+        <span class="exp-tool">Framer</span>
+        <span class="exp-tool">HTML/CSS/JS</span>
+        <span class="exp-tool">WooCommerce</span>
+        <span class="exp-tool">SEO</span>
+      </div>
+      <a href="services.html" class="exp-link">Voir les détails →</a>
+      <div class="exp-bg-word">WEB</div>
+    </div>
+
+    <!-- PHOTO -->
+    <div class="exp-card reveal rd2">
+      <div class="exp-badge badge-expert">Expert confirmé</div>
+      <h3 class="exp-title">Photo&shy;graphie<br><em>professionnelle</em></h3>
+      <p class="exp-body">
+        Des images qui racontent quelque chose. <strong>Photographie de produits, corporate, événementielle et éditoriale</strong> — avec une direction artistique pensée pour être immédiatement utilisable sur votre site et vos réseaux.
+      </p>
+      <div class="exp-tools">
+        <span class="exp-tool">Produit</span>
+        <span class="exp-tool">Corporate</span>
+        <span class="exp-tool">Événementiel</span>
+        <span class="exp-tool">Éditorial</span>
+        <span class="exp-tool">Lightroom</span>
+        <span class="exp-tool">Retouche</span>
+      </div>
+      <a href="#contact" class="exp-link">Demander un devis →</a>
+      <div class="exp-bg-word">PHOTO</div>
+    </div>
+  </div>
+
+  <!-- SERVICES COMPLÉMENTAIRES -->
+  <p class="section-kicker reveal" style="margin-bottom:1.5rem">En complément</p>
+  <div class="services-row">
+    <div class="svc-card reveal rd1">
+      <div class="svc-num">03</div>
+      <h3 class="svc-title">Vidéo & Réalisation</h3>
+      <p class="svc-desc">Reels, études de cas, showreels. IA générative (Kling AI, Runway) pour du contenu cinématique premium.</p>
+      <a href="showreel.html" style="font-family:var(--font-mono);font-size:.62rem;color:var(--lime);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;margin-top:1rem;display:inline-block;transition:opacity .2s" onmouseenter="this.style.opacity='.7'" onmouseleave="this.style.opacity='1'">Voir le showreel →</a>
+    </div>
+    <div class="svc-card reveal rd2">
+      <div class="svc-num">04</div>
+      <h3 class="svc-title">Publicité payante</h3>
+      <p class="svc-desc">Campagnes Meta Ads et Google Ads gérées avec reporting chiffré. Chaque euro a une raison d'être.</p>
+    </div>
+    <div class="svc-card reveal rd3">
+      <div class="svc-num">05</div>
+      <h3 class="svc-title">Stratégie & Contenu</h3>
+      <p class="svc-desc">Calendrier éditorial, copywriting, direction créative Instagram et LinkedIn. Contenu qui convertit.</p>
+    </div>
+    <div class="svc-card reveal rd4">
+      <div class="svc-num">06</div>
+      <h3 class="svc-title">Direction artistique</h3>
+      <p class="svc-desc">Identité visuelle, cohérence de marque, direction de shooting. L'oeil créatif derrière chaque projet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ONE PERSON -->
+<section class="why-section">
+  <div class="why-inner">
+    <div>
+      <p class="section-kicker reveal">Pourquoi ça change tout</p>
+      <h2 class="why-h reveal">Un seul créatif.<br>Toute <em>la chaîne.</em></h2>
+      <p class="why-body reveal">
+        La plupart des marques parisiennes travaillent avec <strong>4 prestataires différents</strong> : un photographe, un développeur web, une agence social media, un freelance vidéo. Résultat : des briefs qui se perdent, des livrables incohérents, et une facture cumulée qui explose.
+        <br><br>
+        Moi je fais tout. <em>Avec la même vision, du début à la fin.</em> Vos photos de produit sont prises en pensant déjà à comment elles vont s'intégrer sur le site que je vais construire. Votre identité visuelle est cohérente partout parce que c'est la même personne qui crée tout.
+      </p>
+      <ul class="why-list reveal">
+        <li>Un brief au lieu de quatre — vous parlez à une seule personne</li>
+        <li>Cohérence visuelle totale entre site, photo et contenu</li>
+        <li>Délais réduits — pas de coordination entre prestataires</li>
+        <li>Budget optimisé — pas de marges d'agence empilées</li>
+        <li>Disponibilité directe — pas d'account manager intermédiaire</li>
+      </ul>
+    </div>
+    <div>
+      <div class="why-quote reveal">
+        <p>"La plupart des agences vous vendent de la présence. Moi je vous livre un résultat — photographié, développé, publié, optimisé."</p>
+      </div>
+      <div class="why-stats">
+        <div class="why-stat-box reveal rd1">
+          <div class="why-stat-num">1</div>
+          <div class="why-stat-label">Interlocuteur pour tout</div>
+        </div>
+        <div class="why-stat-box reveal rd2">
+          <div class="why-stat-num">−40%</div>
+          <div class="why-stat-label">Vs budget multi-prestataires</div>
+        </div>
+        <div class="why-stat-box reveal rd3">
+          <div class="why-stat-num">24h</div>
+          <div class="why-stat-label">Délai de réponse max</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="case-section" id="work">
+  <p class="section-kicker reveal">Projets clients</p>
+  <h2 class="section-h reveal">Ils m'ont fait<br><em>confiance.</em></h2>
+
+  <div class="proj-duo">
+
+    <!-- ICONIC FACE -->
+    <div class="proj-big-card reveal rd1">
+      <div class="proj-big-visual proj-iconic-bg">
+        <span class="proj-big-bgword">ICONIC</span>
+        <div class="proj-big-visual-inner">
+          <div class="proj-big-logo">ICONIC FACE</div>
+          <div class="proj-big-tagline">Studio beauté · Paris · Mobile</div>
+          <div class="proj-big-chips">
+            <span>Site web</span>
+            <span>Meta Ads</span>
+            <span>IA Visuels</span>
+            <span>Contenu IG</span>
+          </div>
+        </div>
+        <div class="proj-big-badge">Client actif · Full service</div>
+      </div>
+      <div class="proj-big-body">
+        <p class="proj-big-kicker">Site web · Meta Ads · IA · Contenu · Stratégie</p>
+        <h3 class="proj-big-title">Iconic <em>Face</em></h3>
+        <p class="proj-big-desc">Studio de beauté mobile parisien fondé par Rose — extensions de cils haut de gamme. Mission complète de A à Z : site vitrine, gestion des Meta Ads, visuels IA cinématiques, stratégie de contenu et conseil structuration d'entreprise.</p>
+        <ul class="proj-big-list">
+          <li>Création et développement du site iconicface.fr</li>
+          <li>Gestion campagnes Meta Ads — acquisition clients active</li>
+          <li>Visuels IA Kling AI & Banana Pro — direction sombre/cinématique</li>
+          <li>Scripts Reels + copywriting Instagram sans hashtags</li>
+          <li>Conseil SASU, financement BPI France & stratégie de croissance</li>
+        </ul>
+        <div class="proj-big-tags">
+          <span class="proj-tag">Site web</span>
+          <span class="proj-tag">Meta Ads</span>
+          <span class="proj-tag">IA Générative</span>
+          <span class="proj-tag">Contenu IG</span>
+          <span class="proj-tag">Stratégie</span>
+        </div>
+        <a href="https://iconicface.fr" target="_blank" class="proj-live-link">Voir iconicface.fr →</a>
+      </div>
+    </div>
+
+    <!-- GLOBAL SAKÉ -->
+    <div class="proj-big-card reveal rd2">
+      <div class="proj-big-visual proj-sake-bg">
+        <span class="proj-big-bgword">SAKÉ</span>
+        <div class="proj-big-visual-inner">
+          <div class="proj-big-logo">GLOBAL SAKÉ</div>
+          <div class="proj-big-metrics">
+            <div class="proj-big-metric"><span class="proj-big-val">Site</span><span class="proj-big-lbl">globalsake.com</span></div>
+            <div class="proj-big-metric"><span class="proj-big-val">4</span><span class="proj-big-lbl">Plateformes</span></div>
+            <div class="proj-big-metric"><span class="proj-big-val">Ads</span><span class="proj-big-lbl">Google + Meta</span></div>
+          </div>
+        </div>
+        <div class="proj-big-badge">Client actif · Retainer</div>
+      </div>
+      <div class="proj-big-body">
+        <p class="proj-big-kicker">Site web · Social Media · Vidéo · Google Ads · Meta Ads</p>
+        <h3 class="proj-big-title">Global <em>Saké</em></h3>
+        <p class="proj-big-desc">Prestige Japon Distribution — importateur de saké premium basé boulevard Haussmann, Paris. Stratégie digitale multi-plateforme, production de contenu culturel, publicité payante et marketing événementiel sous contrat mensuel.</p>
+        <ul class="proj-big-list">
+          <li>Création et développement du site globalsake.com</li>
+          <li>Reels culturels saké — contenu éducatif premium</li>
+          <li>Campagnes Google Ads & Meta Ads gérées</li>
+          <li>Marketing événementiel — cours de dégustation</li>
+          <li>Copywriting multi-plateforme : IG, LinkedIn, Google, YouTube</li>
+        </ul>
+        <div class="proj-big-tags">
+          <span class="proj-tag">Site web</span>
+          <span class="proj-tag">Social Media</span>
+          <span class="proj-tag">Google Ads</span>
+          <span class="proj-tag">Meta Ads</span>
+          <span class="proj-tag">Vidéo</span>
+        </div>
+        <a href="https://globalsake.com" target="_blank" class="proj-live-link">Voir globalsake.com →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SITES WEB — 3 références -->
+  <div class="proj-ref-row reveal">
+    <span class="proj-ref-label">Sites réalisés</span>
+    <div class="proj-ref-card">
+      <div class="proj-ref-dots"><span></span><span></span><span></span></div>
+      <div class="proj-ref-info">
+        <span class="proj-ref-name">globalsake.com</span>
+        <span class="proj-ref-desc">Importateur saké premium · Paris 8e · Design sur mesure</span>
+      </div>
+      <a href="https://globalsake.com" target="_blank" class="proj-ref-link">Voir →</a>
+    </div>
+    <div class="proj-ref-card">
+      <div class="proj-ref-dots"><span></span><span></span><span></span></div>
+      <div class="proj-ref-info">
+        <span class="proj-ref-name">iconicface.fr</span>
+        <span class="proj-ref-desc">Studio beauté mobile · Paris · Mobile-first</span>
+      </div>
+      <a href="https://iconicface.fr" target="_blank" class="proj-ref-link">Voir →</a>
+    </div>
+    <div class="proj-ref-card">
+      <div class="proj-ref-dots"><span></span><span></span><span></span></div>
+      <div class="proj-ref-info">
+        <span class="proj-ref-name">bubbleride.fr</span>
+        <span class="proj-ref-desc">Location véhicules premium · Design épuré</span>
+      </div>
+      <a href="https://bubbleride.fr" target="_blank" class="proj-ref-link">Voir →</a>
+    </div>
+  </div>
+
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <p class="section-kicker reveal">Comment ça marche</p>
+  <h2 class="section-h reveal">La méthode<br><em>en 4 étapes.</em></h2>
+  <div class="process-steps">
+    <div class="process-step reveal rd1">
+      <div class="process-connector"></div>
+      <div class="process-step-inner">
+        <h3 class="process-step-title">Découverte</h3>
+        <p class="process-step-desc">Appel de 30 min gratuit. Je comprends votre marque, vos objectifs, votre budget. Pas de PowerPoint — une vraie conversation.</p>
+      </div>
+    </div>
+    <div class="process-step reveal rd2">
+      <div class="process-connector"></div>
+      <div class="process-step-inner">
+        <h3 class="process-step-title">Proposition</h3>
+        <p class="process-step-desc">Devis clair sous 48h. Ce que je fais, comment, pour combien, et dans quel délai. Zéro surprise ensuite.</p>
+      </div>
+    </div>
+    <div class="process-step reveal rd3">
+      <div class="process-connector"></div>
+      <div class="process-step-inner">
+        <h3 class="process-step-title">Exécution</h3>
+        <p class="process-step-desc">Je livre. Shooting, développement, contenu — avec des points d'étape réguliers. Vous voyez l'avancement en temps réel.</p>
+      </div>
+    </div>
+    <div class="process-step reveal rd4">
+      <div class="process-step-inner">
+        <h3 class="process-step-title">Suivi</h3>
+        <p class="process-step-desc">Livraison + accompagnement post-projet. Pour les missions récurrentes : retainer mensuel, disponibilité prioritaire.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2 class="contact-title reveal">On<br>travaille<br>ensemble ?</h2>
+      <p class="contact-sub reveal">Disponible pour de nouveaux projets à Paris et en Île-de-France. Réponse sous 24h garantie.</p>
+      <div class="contact-links reveal">
+        <a href="mailto:sivarubanlaksman.pro@gmail.com" class="contact-link">
+          <div class="c-icon">@</div>
+          sivarubanlaksman.pro@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/laksman-sivaruban-70637b231/" target="_blank" class="contact-link">
+          <div class="c-icon">in</div>
+          Laksman Sivaruban
+        </a>
+        <a href="https://instagram.com/bylaksman" target="_blank" class="contact-link">
+          <div class="c-icon">ig</div>
+          @bylaksman
+        </a>
+      </div>
+    </div>
+    <div class="reveal">
+      <form class="contact-form" action="https://formspree.io/f/mojkodvb" method="POST">
+        <div class="form-field">
+          <label class="form-label">Votre nom</label>
+          <input type="text" name="nom" class="form-input" placeholder="Marie Dupont" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-input" placeholder="marie@marque.com" required>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Type de projet</label>
+          <select name="type_projet" class="form-input">
+            <option value="">Sélectionner...</option>
+            <option value="site-web">Création de site web</option>
+            <option value="photographie">Photographie</option>
+            <option value="video">Vidéo & Réalisation</option>
+            <option value="pub">Publicité payante (Ads)</option>
+            <option value="strategie">Stratégie digitale</option>
+            <option value="complet">Projet complet (plusieurs disciplines)</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Votre projet</label>
+          <textarea name="message" class="form-input" placeholder="Décrivez votre projet en quelques lignes..." required></textarea>
+        </div>
+        <input type="hidden" name="_subject" value="Nouveau projet via portfolio">
+        <input type="text" name="_gotcha" style="display:none">
+        <button type="submit" class="form-btn">Envoyer →</button>
+        <div class="form-success" id="form-success">Message envoyé — je reviens vers vous sous 24h.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Laksman Sivaruban — Auto-entrepreneur · Houilles 78800</span>
+  <span class="footer-logo">LS.</span>
+  <span class="footer-copy">sivarubanlaksman.pro@gmail.com</span>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{
+  cursor.style.transform=`translate(${e.clientX-5}px,${e.clientY-5}px)`;
+  ring.style.transform=`translate(${e.clientX-19}px,${e.clientY-19}px)`;
+});
+document.querySelectorAll('a,button,.exp-card,.svc-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform+=' scale(2.2)';ring.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform=cursor.style.transform.replace(' scale(2.2)','');ring.style.opacity='1'});
+});
+
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Formspree AJAX
+const form=document.querySelector('.contact-form');
+const success=document.getElementById('form-success');
+if(form){
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const btn=form.querySelector('.form-btn');
+    btn.textContent='Envoi...';
+    btn.disabled=true;
+    try{
+      const res=await fetch(form.action,{method:'POST',body:new FormData(form),headers:{Accept:'application/json'}});
+      if(res.ok){
+        form.reset();
+        btn.style.display='none';
+        success.style.display='block';
+      } else {
+        btn.textContent='Erreur — réessayer';
+        btn.disabled=false;
+      }
+    } catch{
+      btn.textContent='Erreur — réessayer';
+      btn.disabled=false;
+    }
+  });
+}
+</script>
+</body>
+</html>

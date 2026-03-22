@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Showreel — Laksman Sivaruban</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:#7C3AED;--v2:#A855F7;--lime:#CCFF00;--white:#F8F8F2;--off:#080808;--mid:#111;--card:#181818;--muted:#444;
+  --font-display:'Bebas Neue',sans-serif;--font-body:'DM Sans',sans-serif;--font-mono:'Space Mono',monospace;
+}
+html{scroll-behavior:smooth}
+body{background:var(--off);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none}
+#cursor{position:fixed;width:10px;height:10px;background:var(--v2);border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:screen;transition:transform .1s}
+#cursor-ring{position:fixed;width:40px;height:40px;border:1px solid rgba(168,85,247,.6);border-radius:50%;pointer-events:none;z-index:9998;transition:transform .4s cubic-bezier(.2,1,.2,1)}
+body::after{content:'';position:fixed;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:900;opacity:.6}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:500;padding:1.4rem 3rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(16px);background:rgba(8,8,8,.7)}
+.nav-logo{font-family:var(--font-display);font-size:1.3rem;letter-spacing:.1em;color:var(--lime);text-decoration:none}
+.nav-back{font-family:var(--font-mono);font-size:.7rem;color:var(--muted);text-decoration:none;letter-spacing:.15em;text-transform:uppercase;transition:color .2s}
+.nav-back:hover{color:var(--white)}
+.nav-cta{font-family:var(--font-mono);font-size:.72rem;background:var(--v2);color:#fff;padding:.45rem 1.1rem;text-decoration:none;text-transform:uppercase;letter-spacing:.1em;font-weight:700;transition:background .2s}
+.nav-cta:hover{background:var(--lime);color:#000}
+
+/* ── HERO CINEMATIC ── */
+.reel-hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center}
+
+/* Animated gradient orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;animation:orb-float linear infinite}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,.35) 0%,transparent 70%);top:-20%;left:-15%;animation-duration:20s;animation-direction:alternate}
+.orb-2{width:500px;height:500px;background:radial-gradient(circle,rgba(204,255,0,.12) 0%,transparent 70%);bottom:-20%;right:-10%;animation-duration:27s;animation-direction:alternate-reverse}
+.orb-3{width:400px;height:400px;background:radial-gradient(circle,rgba(168,85,247,.2) 0%,transparent 70%);top:30%;right:20%;animation-duration:16s}
+@keyframes orb-float{0%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-20px) scale(1.05)}66%{transform:translate(-20px,30px) scale(.97)}100%{transform:translate(15px,10px) scale(1.02)}}
+
+.reel-hero-content{position:relative;z-index:2}
+.reel-tag{font-family:var(--font-mono);font-size:.72rem;color:var(--v2);letter-spacing:.25em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp .5s .1s forwards;display:inline-flex;align-items:center;gap:.6rem}
+.reel-tag::before,.reel-tag::after{content:'';width:20px;height:1px;background:var(--v2);display:inline-block}
+.reel-title{font-family:var(--font-display);font-size:clamp(6rem,18vw,16rem);line-height:.85;letter-spacing:.01em;opacity:0;animation:fadeUp .9s .25s forwards}
+.reel-title .t1{display:block;color:var(--white)}
+.reel-title .t2{display:block;color:transparent;-webkit-text-stroke:2px var(--v2)}
+.reel-title .t3{display:block;color:var(--lime)}
+.reel-meta{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-top:2rem;opacity:0;animation:fadeUp .6s .7s forwards}
+.reel-play-hint{display:flex;align-items:center;gap:1rem;margin-top:3rem;opacity:0;animation:fadeUp .6s .9s forwards;justify-content:center}
+.play-btn-fake{width:64px;height:64px;border:1.5px solid rgba(168,85,247,.5);border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative}
+.play-btn-fake::before{content:'';position:absolute;inset:-8px;border:1px solid rgba(168,85,247,.15);border-radius:50%;animation:ring-pulse 2s ease-in-out infinite}
+@keyframes ring-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.4}}
+.play-triangle{width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:18px solid var(--v2);margin-left:4px}
+.play-hint-text{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.15em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+
+/* REEL GRID */
+.reel-section{padding:6rem 3rem}
+.section-kicker{font-family:var(--font-mono);font-size:.72rem;color:var(--v2);letter-spacing:.2em;text-transform:uppercase;margin-bottom:.9rem}
+.section-h{font-family:var(--font-display);font-size:clamp(3rem,6vw,5.5rem);line-height:.95;letter-spacing:.02em;margin-bottom:3rem}
+.section-h em{color:var(--lime);font-style:normal}
+
+/* FEATURED REEL — cinematic card */
+.featured-reel{display:grid;grid-template-columns:1.4fr 1fr;gap:0;background:var(--card);border:1px solid rgba(255,255,255,.06);overflow:hidden;margin-bottom:2rem;position:relative}
+.featured-reel-visual{position:relative;min-height:480px;background:linear-gradient(135deg,#0a0010 0%,#1a0040 40%,#2d0068 70%,#1a0050 100%);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.featured-reel-visual::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(168,85,247,.04) 2px,rgba(168,85,247,.04) 4px)}
+.reel-visual-title{font-family:var(--font-display);font-size:6rem;color:transparent;-webkit-text-stroke:1px rgba(168,85,247,.3);text-align:center;line-height:.9;position:relative;z-index:1;animation:glow-pulse 4s ease-in-out infinite}
+@keyframes glow-pulse{0%,100%{-webkit-text-stroke-color:rgba(168,85,247,.3)}50%{-webkit-text-stroke-color:rgba(204,255,0,.5)}}
+.reel-visual-orb{position:absolute;width:200px;height:200px;background:radial-gradient(circle,rgba(124,58,237,.5),transparent 70%);border-radius:50%;bottom:-40px;right:-40px;filter:blur(40px);animation:orb-float 8s ease-in-out infinite alternate}
+.featured-reel-info{padding:3rem;display:flex;flex-direction:column;justify-content:space-between}
+.featured-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.62rem;background:rgba(204,255,0,.1);color:var(--lime);border:1px solid rgba(204,255,0,.3);padding:.3rem .8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:1.5rem;align-self:flex-start}
+.featured-title{font-family:var(--font-display);font-size:3rem;letter-spacing:.04em;line-height:.95;margin-bottom:1rem}
+.featured-desc{font-size:.9rem;line-height:1.75;color:#777;flex:1}
+.featured-specs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.spec-pill{font-family:var(--font-mono);font-size:.62rem;padding:.25rem .7rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);color:#888;letter-spacing:.06em}
+.featured-status{margin-top:2rem;display:flex;align-items:center;gap:.8rem}
+.status-dot{width:8px;height:8px;border-radius:50%;background:var(--v2);animation:pulse 1.8s ease-in-out infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.5)}}
+.status-text{font-family:var(--font-mono);font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+/* REEL GRID SMALLER */
+.reel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.reel-card{background:var(--card);border:1px solid rgba(255,255,255,.06);overflow:hidden;position:relative;transition:border-color .3s,transform .3s}
+.reel-card:hover{border-color:rgba(168,85,247,.4);transform:translateY(-4px)}
+.reel-card-visual{height:200px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.reel-card-visual-1{background:linear-gradient(135deg,#001a1a,#003333,#004d40)}
+.reel-card-visual-2{background:linear-gradient(135deg,#1a0a00,#3d1f00,#5c2f00)}
+.reel-card-visual-3{background:linear-gradient(135deg,#0d001a,#1f0040,#2d0060)}
+.reel-card-visual::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 3px,rgba(255,255,255,.02) 3px,rgba(255,255,255,.02) 6px)}
+.reel-card-label{font-family:var(--font-display);font-size:3.5rem;color:rgba(255,255,255,.08);line-height:.9;position:relative;z-index:1;text-align:center}
+.reel-card-info{padding:1.4rem}
+.reel-card-type{font-family:var(--font-mono);font-size:.6rem;color:var(--v2);text-transform:uppercase;letter-spacing:.15em;margin-bottom:.5rem}
+.reel-card-title{font-family:var(--font-display);font-size:1.5rem;letter-spacing:.04em;margin-bottom:.5rem}
+.reel-card-desc{font-size:.82rem;color:#666;line-height:1.65;margin-bottom:1rem}
+.reel-card-meta{display:flex;gap:.5rem;flex-wrap:wrap}
+.meta-tag{font-family:var(--font-mono);font-size:.58rem;padding:.18rem .5rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:#666;letter-spacing:.06em}
+
+/* TIMELINE — Production Roadmap */
+.timeline-section{padding:6rem 3rem;background:var(--mid)}
+.timeline{display:flex;flex-direction:column;gap:0;margin-top:3rem;position:relative;padding-left:3rem}
+.timeline::before{content:'';position:absolute;left:.6rem;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--v),rgba(124,58,237,.1))}
+.timeline-item{position:relative;padding:0 0 3rem 2.5rem}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{position:absolute;left:-2.05rem;top:.2rem;width:14px;height:14px;border-radius:50%;border:2px solid var(--v);background:var(--off);z-index:1;transition:background .3s}
+.timeline-item.active .timeline-dot{background:var(--lime);border-color:var(--lime);box-shadow:0 0 12px rgba(204,255,0,.4)}
+.timeline-item.next .timeline-dot{background:var(--v);border-color:var(--v2);box-shadow:0 0 8px rgba(168,85,247,.3)}
+.timeline-date{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.4rem}
+.timeline-title{font-family:var(--font-display);font-size:1.8rem;letter-spacing:.04em;margin-bottom:.4rem}
+.timeline-desc{font-size:.88rem;color:#666;line-height:1.7;max-width:600px}
+.timeline-badge{display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-mono);font-size:.58rem;padding:.2rem .65rem;margin-top:.6rem;letter-spacing:.1em;text-transform:uppercase}
+.badge-active{background:rgba(204,255,0,.08);color:var(--lime);border:1px solid rgba(204,255,0,.25)}
+.badge-next{background:rgba(168,85,247,.1);color:var(--v2);border:1px solid rgba(168,85,247,.25)}
+.badge-plan{background:rgba(255,255,255,.04);color:var(--muted);border:1px solid rgba(255,255,255,.08)}
+
+/* COLLAB CTA */
+.collab-section{padding:8rem 3rem;position:relative;overflow:hidden}
+.collab-section::before{content:'REEL';font-family:var(--font-display);font-size:28vw;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:transparent;-webkit-text-stroke:1px rgba(168,85,247,.05);pointer-events:none;white-space:nowrap}
+.collab-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;position:relative;z-index:1}
+.collab-h{font-family:var(--font-display);font-size:clamp(3.5rem,7vw,6.5rem);line-height:.9;letter-spacing:.02em;margin-bottom:1.5rem}
+.collab-h em{color:var(--lime);font-style:normal}
+.collab-body{font-size:.95rem;line-height:1.8;color:#777;margin-bottom:2rem}
+.collab-body strong{color:var(--white);font-weight:500}
+.collab-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-purple{font-family:var(--font-mono);font-size:.78rem;background:var(--v2);color:#fff;padding:.9rem 2rem;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;font-weight:700;transition:background .2s,transform .15s}
+.btn-purple:hover{background:var(--lime);color:#000;transform:translateY(-2px)}
+.btn-ghost{font-family:var(--font-mono);font-size:.78rem;border:1px solid rgba(255,255,255,.15);color:var(--white);padding:.9rem 2rem;text-decoration:none;text-transform:uppercase;letter-spacing:.12em;transition:border-color .2s,transform .15s}
+.btn-ghost:hover{border-color:var(--v2);color:var(--v2);transform:translateY(-2px)}
+.collab-right{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.collab-stat{background:var(--card);padding:1.8rem;border:1px solid rgba(255,255,255,.05)}
+.collab-stat-num{font-family:var(--font-display);font-size:3rem;color:var(--v2);line-height:1;margin-bottom:.3rem}
+.collab-stat-label{font-family:var(--font-mono);font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.12em}
+
+footer{padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05)}
+.footer-copy{font-family:var(--font-mono);font-size:.68rem;color:var(--muted)}
+.footer-logo{font-family:var(--font-display);font-size:1.2rem;color:rgba(255,255,255,.1)}
+
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+.rd1{transition-delay:.1s}.rd2{transition-delay:.2s}.rd3{transition-delay:.3s}.rd4{transition-delay:.4s}
+
+@media(max-width:768px){
+  nav{padding:1.2rem 1.5rem}
+  .reel-section,.timeline-section,.collab-section{padding:5rem 1.5rem}
+  .featured-reel{grid-template-columns:1fr}
+  .featured-reel-visual{min-height:260px}
+  .reel-grid{grid-template-columns:1fr}
+  .collab-inner{grid-template-columns:1fr;gap:3rem}
+  .collab-right{grid-template-columns:1fr 1fr}
+  .timeline{padding-left:2rem}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">LS.</a>
+  <a href="index.html" class="nav-back">← Retour portfolio</a>
+  <a href="index.html#contact" class="nav-cta">Travailler ensemble →</a>
+</nav>
+
+<!-- HERO CINEMATIC -->
+<section class="reel-hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="reel-hero-content">
+    <p class="reel-tag">Démo Reel · 2026</p>
+    <h1 class="reel-title">
+      <span class="t1">DEMO</span>
+      <span class="t2">REEL</span>
+      <span class="t3">2026</span>
+    </h1>
+    <p class="reel-meta">Stratégie · Vidéo · Ads · Web · IA Générative</p>
+    <div class="reel-play-hint">
+      <div class="play-btn-fake">
+        <div class="play-triangle"></div>
+      </div>
+      <p class="play-hint-text">Production en cours — Sortie Avril 2026</p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="reel-section">
+  <p class="section-kicker reveal">En vedette</p>
+  <h2 class="section-h reveal">Le projet<br><em>phare.</em></h2>
+
+  <div class="featured-reel reveal">
+    <div class="featured-reel-visual">
+      <div class="reel-visual-title">GLOBAL<br>SAKÉ</div>
+      <div class="reel-visual-orb"></div>
+    </div>
+    <div class="featured-reel-info">
+      <div>
+        <div class="featured-badge">⚡ Case study</div>
+        <h3 class="featured-title">Global Saké — Résultats</h3>
+        <p class="featured-desc">Présentation complète de la stratégie digitale déployée pour Prestige Japon Distribution. Résultats avant/après, métriques réelles, processus détaillé. Le type de contenu qui convainc un prospect en 60 secondes — parce que ce sont de vraies données, pas du storytelling.</p>
+        <div class="featured-specs">
+          <span class="spec-pill">60 sec</span>
+          <span class="spec-pill">Vertical 9:16</span>
+          <span class="spec-pill">Instagram / LinkedIn</span>
+          <span class="spec-pill">Kling AI</span>
+          <span class="spec-pill">CapCut</span>
+        </div>
+      </div>
+      <div class="featured-status">
+        <div class="status-dot"></div>
+        <span class="status-text">En préparation · Sortie Avril 2026</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMALLER REELS -->
+  <div class="reel-grid">
+    <div class="reel-card reveal rd1">
+      <div class="reel-card-visual reel-card-visual-1">
+        <span class="reel-card-label">SERVICES</span>
+      </div>
+      <div class="reel-card-info">
+        <p class="reel-card-type">Présentation services</p>
+        <h3 class="reel-card-title">Ce que je fais exactement</h3>
+        <p class="reel-card-desc">Tour d'horizon complet : stratégie, ads, vidéo, web, IA. Format talking-head premium avec motion design. Destiné aux prospects qui découvrent mon profil.</p>
+        <div class="reel-card-meta">
+          <span class="meta-tag">120 sec</span>
+          <span class="meta-tag">LinkedIn / YouTube</span>
+          <span class="meta-tag">16:9</span>
+        </div>
+      </div>
+    </div>
+    <div class="reel-card reveal rd2">
+      <div class="reel-card-visual reel-card-visual-2">
+        <span class="reel-card-label">PARIS</span>
+      </div>
+      <div class="reel-card-info">
+        <p class="reel-card-type">Personal brand · LinkedIn</p>
+        <h3 class="reel-card-title">Le marketing à Paris, c'est cassé</h3>
+        <p class="reel-card-desc">Point de vue fort sur les erreurs des agences parisiennes. Contenu LinkedIn conçu pour générer de l'engagement, des partages, et des DMs qualifiés.</p>
+        <div class="reel-card-meta">
+          <span class="meta-tag">60 sec</span>
+          <span class="meta-tag">LinkedIn</span>
+          <span class="meta-tag">Carré 1:1</span>
+        </div>
+      </div>
+    </div>
+    <div class="reel-card reveal rd3">
+      <div class="reel-card-visual reel-card-visual-3">
+        <span class="reel-card-label">SHOWREEL</span>
+      </div>
+      <div class="reel-card-info">
+        <p class="reel-card-type">Showreel complet</p>
+        <h3 class="reel-card-title">Best of — Tous clients</h3>
+        <p class="reel-card-desc">Compilation des meilleurs travaux produits : visuels IA, Reels clients, motion design, développements web. L'arme principale du portfolio.</p>
+        <div class="reel-card-meta">
+          <span class="meta-tag">90 sec</span>
+          <span class="meta-tag">Instagram / Site</span>
+          <span class="meta-tag">9:16</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <p class="section-kicker reveal">Production schedule</p>
+  <h2 class="section-h reveal">La roadmap<br><em>vidéo.</em></h2>
+  <div class="timeline">
+    <div class="timeline-item active reveal">
+      <div class="timeline-dot"></div>
+      <p class="timeline-date">Mars 2026 — En cours</p>
+      <h3 class="timeline-title">Script & pré-production</h3>
+      <p class="timeline-desc">Rédaction des scripts pour chaque vidéo. Direction créative, storyboard simplifié, préparation des prompts IA pour les séquences générées.</p>
+      <span class="timeline-badge badge-active">● En cours</span>
+    </div>
+    <div class="timeline-item next reveal">
+      <div class="timeline-dot"></div>
+      <p class="timeline-date">Avril 2026</p>
+      <h3 class="timeline-title">Production — Case Study Global Saké</h3>
+      <p class="timeline-desc">Tournage, génération IA, assemblage montage. Première vidéo prioritaire : c'est la preuve sociale la plus forte disponible.</p>
+      <span class="timeline-badge badge-next">→ Prochaine étape</span>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <p class="timeline-date">Avril–Mai 2026</p>
+      <h3 class="timeline-title">Vidéo services + Personal brand</h3>
+      <p class="timeline-desc">Présentation des services et contenu LinkedIn à fort POV. Distribution et tests d'engagement pour optimiser les formats.</p>
+      <span class="timeline-badge badge-plan">À venir</span>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <p class="timeline-date">Mai 2026</p>
+      <h3 class="timeline-title">Showreel final — Compilation</h3>
+      <p class="timeline-desc">Assemblage du showreel complet avec tous les meilleurs éléments produits. Intégration sur le site portfolio et pages sociales.</p>
+      <span class="timeline-badge badge-plan">À venir</span>
+    </div>
+  </div>
+</section>
+
+<!-- COLLAB CTA -->
+<section class="collab-section">
+  <div class="collab-inner">
+    <div>
+      <h2 class="collab-h reveal">Votre marque<br>mérite d'être<br><em>filmée.</em></h2>
+      <p class="collab-body reveal">La vidéo est le format qui domine tous les algorithmes en 2026. <strong>Reels, études de cas, showreels — je gère de A à Z, script compris.</strong> Si vous avez un projet vidéo, je veux l'entendre.</p>
+      <div class="collab-btns reveal">
+        <a href="index.html#contact" class="btn-purple">Discuter d'un projet vidéo →</a>
+        <a href="services.html" class="btn-ghost">Voir les services</a>
+      </div>
+    </div>
+    <div class="collab-right reveal">
+      <div class="collab-stat">
+        <div class="collab-stat-num">3×</div>
+        <div class="collab-stat-label">Plus de portée organique avec les Reels vs photos</div>
+      </div>
+      <div class="collab-stat">
+        <div class="collab-stat-num">2s</div>
+        <div class="collab-stat-label">Pour accrocher un spectateur avant qu'il scrolle</div>
+      </div>
+      <div class="collab-stat">
+        <div class="collab-stat-num">90%</div>
+        <div class="collab-stat-label">Des décisions d'achat influencées par du contenu vidéo</div>
+      </div>
+      <div class="collab-stat">
+        <div class="collab-stat-num">IA</div>
+        <div class="collab-stat-label">Visuels génératifs cinématiques sans budget production</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Laksman Sivaruban</span>
+  <span class="footer-logo">LS.</span>
+  <span class="footer-copy">Auto-entrepreneur · Houilles 78800</span>
+</footer>
+
+<script>
+const cursor=document.getElementById('cursor'),ring=document.getElementById('cursor-ring');
+document.addEventListener('mousemove',e=>{
+  cursor.style.transform=`translate(${e.clientX-5}px,${e.clientY-5}px)`;
+  ring.style.transform=`translate(${e.clientX-20}px,${e.clientY-20}px)`;
+});
+document.querySelectorAll('a,button,.reel-card,.featured-reel').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform+=' scale(2.5)';ring.style.opacity='0'});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform=cursor.style.transform.replace(' scale(2.5)','');ring.style.opacity='1'});
+});
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
